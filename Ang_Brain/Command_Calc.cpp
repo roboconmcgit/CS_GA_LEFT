@@ -1359,9 +1359,12 @@ void CommandCalc::StepRunner(int line_value, float odo, float angle, bool dansa)
 
 /************/
 
-
-
 void CommandCalc::LookUpGateRunner(){
+}
+
+
+void CommandCalc::GarageRunner(){
+
  	int dammy_line_value;
   static int32_t clock_start;
   static float   ref_odo;
@@ -1509,10 +1512,6 @@ void CommandCalc::LookUpGateRunner(){
 			tail_stand_mode = false;
 			break;
 	}
-}
-
-void CommandCalc::GarageRunner(){
-
 }
 
 void CommandCalc::StopRobo(){
