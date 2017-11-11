@@ -52,7 +52,8 @@ void Ang_Brain::run() {
 		gCommandCalc->yawratecmd,
 		gCommandCalc->anglecommand,
 		gCommandCalc->tail_stand_mode,
-		gCommandCalc->tail_lug_mode);   //8: 走行戦略の計算結果を取得
+		gCommandCalc->tail_lug_mode,
+	  gCommandCalc->Rolling_mode);   //8: 走行戦略の計算結果を取得
 }
 
 
@@ -110,13 +111,15 @@ void Ang_Brain::GetCalcResult(int forward_calc,
 			      float yawratecmd_calc,
 			      float anglecommand_calc,
 			      bool tail_stand_mode_calc,
-			      bool tail_lug_mode_calc){
+						bool tail_lug_mode_calc,
+						bool Rolling_mode_calc){
   
   forward         = forward_calc;
   yawratecmd      = yawratecmd_calc;
   anglecommand    = anglecommand_calc;
   tail_stand_mode = tail_stand_mode_calc;
   tail_lug_mode   = tail_lug_mode_calc;
+	Rolling_mode    = Rolling_mode_calc;
 
 }
 

@@ -83,6 +83,15 @@ extern float STEP_TO_GARAGE_LENGTH;
 extern float GARAGE_X_POS;
 extern float GARAGE_LENGTH;
 
+extern float RAD_150_DEG;
+extern int   LUG_COL_VAL_GAIN;
+extern float LUG_GRAY_TO_GARAGE;
+extern int   LUG_COL_VAL_OFFSET;
+
+extern float GARAGE_OFFSET_ANGLE;
+extern float GARAGE_TRACE_OFFSET_ANGLE;
+extern float GARAGE_TRACE_LENGTH;
+
 
 //Parameter of Area
 

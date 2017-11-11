@@ -36,6 +36,7 @@ public:
 	float anglecommand;    //尻尾角度
 	bool  tail_stand_mode; //倒立走行フラグ
 	bool  tail_lug_mode; //倒立走行フラグ
+  bool  Rolling_mode;    //片足回転
 
 private:
 
@@ -108,6 +109,7 @@ private:
       Garage_Tail_On,
       Garage_In,
       Garage_Stop,
+      Go_Garage,
       Stop_Robo,
       Track_Debug_00,
       Track_Debug_01,
@@ -140,10 +142,23 @@ private:
       End_of_Step};
 
 
+    enum enumGrage_Mode{
+        Garage_Start,
+        debug_wait,
+        Left_Turn,
+        Tail_On,
+        LineCheck,
+        LineComeBack,
+        LineTrace,
+        GO_GARAGE,
+        GarageIn
+    };
+
     enumStrategy    Strategy;
     enumVirtualGate VirtualGate;
     enumTrack_Mode  Track_Mode;
     enumStep_Mode   Step_Mode;
+    enumGrage_Mode Garage_Mode;
 
 
     
