@@ -122,7 +122,7 @@ float GARAGE_OFFSET_ANGLE = -0.3;
 float GRAY_TO_GARAGE_LENGTH =  200;
 
 float GARAGE_TRACE_OFFSET_ANGLE = -5.0;
-float GARAGE_TRACE_LENGTH = 10.0;
+float GARAGE_TRACE_LENGTH = 75.0;
 
 //Parameter of Area
 

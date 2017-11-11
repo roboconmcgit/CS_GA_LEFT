@@ -74,7 +74,7 @@ void Ang_Robo::init() {
  * @param forward 前進値
  * @param turn    旋回値
  */
-void Ang_Robo::setCommand(int forward, float yawratecmd, signed int tail_ang_req, float yawrate, bool tail_stand_mode, bool tail_lug_mode, bool Rolling) {
+void Ang_Robo::setCommand(int forward, float yawratecmd, signed int tail_ang_req, float yawrate, bool tail_stand_mode, bool tail_lug_mode, int Rolling) {
   mForward         = forward;
   mYawratecmd      = yawratecmd;
   mTail_ang_req    = tail_ang_req;
@@ -194,10 +194,16 @@ void Ang_Robo::run() {
     log_left_pwm        = mBalancer->getPwmLeft();
     log_right_pwm       = mBalancer->getPwmRight();
 
-    if((mRolling_mode == true)&&(Stand_Mode == Tail_Stand)){
+    if((mRolling_mode == 1)&&(Stand_Mode == Tail_Stand)){
       mtail_mode_pwm_l = 0.5*mForward + 1.0*mTurn;
       mLeftWheel.setPWM(mtail_mode_pwm_l);
       mRightWheel.setPWM(0);
+      balance_mode = false;
+    }
+    else if((mRolling_mode == 2)&&(Stand_Mode == Tail_Stand)){
+      mtail_mode_pwm_r = 0.5*mForward + 1.0*mTurn;
+      mLeftWheel.setPWM(0);
+      mRightWheel.setPWM(mtail_mode_pwm_r);
       balance_mode = false;
     }
     else if((balance_off_en == true) && (mTail_Motor.getCount() >  70)){

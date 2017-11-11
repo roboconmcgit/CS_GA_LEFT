@@ -48,7 +48,7 @@ public:
     float anglecommand;    //尻尾角度
     bool  tail_stand_mode; //倒立走行フラグ
     bool  tail_lug_mode;
-    bool  Rolling_mode;
+    int   Rolling_mode;
 
     int SysModeNum;
     int StrategyNum;   //走行戦略
@@ -75,7 +75,7 @@ private:
 		       float anglecommand_calc,
 		       bool  tail_stand_mode_calc,
 		       bool  tail_stand_lug_calc,
-					 bool Rolling_mode_calc);     //走行戦略の計算結果を取得
+					 int   Rolling_mode_calc);     //走行戦略の計算結果を取得
 
     StrategyDet *gStrategyDet = new StrategyDet();
     CommandCalc *gCommandCalc = new CommandCalc();

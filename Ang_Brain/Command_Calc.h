@@ -36,7 +36,7 @@ public:
 	float anglecommand;    //尻尾角度
 	bool  tail_stand_mode; //倒立走行フラグ
 	bool  tail_lug_mode; //倒立走行フラグ
-  bool  Rolling_mode;    //片足回転
+  int   Rolling_mode;    //片足回転
 
 private:
 
@@ -145,7 +145,7 @@ private:
     enum enumGrage_Mode{
         Garage_Start,
         debug_wait,
-        Left_Turn,
+        SHORT_RUN,
         Tail_On,
         LineCheck,
         LineComeBack,

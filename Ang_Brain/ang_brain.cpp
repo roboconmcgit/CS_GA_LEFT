@@ -112,7 +112,7 @@ void Ang_Brain::GetCalcResult(int forward_calc,
 			      float anglecommand_calc,
 			      bool tail_stand_mode_calc,
 						bool tail_lug_mode_calc,
-						bool Rolling_mode_calc){
+						int Rolling_mode_calc){
   
   forward         = forward_calc;
   yawratecmd      = yawratecmd_calc;
