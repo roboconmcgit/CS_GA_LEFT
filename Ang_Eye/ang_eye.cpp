@@ -2,7 +2,7 @@
 #include "math.h"
 
 //#define DEBUG_ODOMETRY
-#define DEBUG_EYE_DEBUG
+//#define DEBUG_EYE_DEBUG
 //#define DEBUG_NANSYO
 
 // 定数宣言
