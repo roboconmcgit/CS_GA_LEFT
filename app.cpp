@@ -573,7 +573,8 @@ void brain_task(intptr_t exinf) {
                             gAng_Brain->anglecommand,
                             gAng_Eye->yawrate,
                             gAng_Brain->tail_stand_mode,
-			    gAng_Brain->tail_lug_mode);//指令値をあなご手足に渡す
+                            gAng_Brain->tail_lug_mode,
+                            gAng_Brain->Rolling_mode);//指令値をあなご手足に渡す
     }
     ext_tsk();
 }

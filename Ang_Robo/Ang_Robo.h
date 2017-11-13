@@ -34,7 +34,7 @@ public:
     void run();
     void run_anago_run();
 
-    void setCommand(int forward, float yawratecmd, signed int tail_ang_req, float yawrate, bool tail_stand_mode, bool tail_lug_mode);
+    void setCommand(int forward, float yawratecmd, signed int tail_ang_req, float yawrate, bool tail_stand_mode, bool tail_lug_mode, int Rolling);
 
 
     void tail_control(signed int angle); //2017.07.28 kota copy from 3-apex
@@ -102,6 +102,8 @@ private:
     bool  mTail_stand_mode;
     bool  mTail_lug_mode;
    
+    int   mRolling_mode;
+
     signed int mTail_ang_req;
     float      tail_motor_pwm;
 

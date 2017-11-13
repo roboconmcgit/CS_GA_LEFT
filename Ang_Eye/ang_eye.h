@@ -1,7 +1,7 @@
 #ifndef ANAGO_EYE_H_
 #define ANAGO_EYE_H_
 
-#define EYE_DEBUG
+//#define EYE_DEBUG
 
 #include "parameter.h"
 #include "ColorSensor.h"

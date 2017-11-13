@@ -39,6 +39,7 @@ extern float RAD_5_DEG; //
 extern float RAD_15_DEG; //deg@1rad 
 extern float RAD_30_DEG; //
 extern float RAD_45_DEG; //
+extern float RAD_60_DEG; //
 
 extern float MINUS_RAD_5_DEG; //
 extern float MINUS_RAD_15_DEG; //
@@ -82,6 +83,15 @@ extern int   STBL_CNT_2nd_DANSA_ON;
 extern float STEP_TO_GARAGE_LENGTH;
 extern float GARAGE_X_POS;
 extern float GARAGE_LENGTH;
+
+extern float RAD_150_DEG;
+extern int   LUG_COL_VAL_GAIN;
+extern float LUG_GRAY_TO_GARAGE;
+extern int   LUG_COL_VAL_OFFSET;
+
+extern float GARAGE_OFFSET_ANGLE;
+extern float GARAGE_TRACE_OFFSET_ANGLE;
+extern float GARAGE_TRACE_LENGTH;
 
 
 //Parameter of Area
