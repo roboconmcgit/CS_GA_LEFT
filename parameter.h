@@ -39,6 +39,7 @@ extern float RAD_5_DEG; //
 extern float RAD_15_DEG; //deg@1rad 
 extern float RAD_30_DEG; //
 extern float RAD_45_DEG; //
+extern float RAD_60_DEG; //
 
 extern float MINUS_RAD_5_DEG; //
 extern float MINUS_RAD_15_DEG; //

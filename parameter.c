@@ -45,6 +45,7 @@ float RAD_5_DEG   = 0.0873; //
 float RAD_15_DEG  = 0.2618; //
 float RAD_30_DEG  = 0.5236; //
 float RAD_45_DEG  = 0.7854; //
+float RAD_60_DEG  = 1.0472; //
 
 float MINUS_RAD_5_DEG  = -0.0873; //
 float MINUS_RAD_15_DEG = -0.2618; //
@@ -122,7 +123,8 @@ float GARAGE_OFFSET_ANGLE = -0.3;
 float GRAY_TO_GARAGE_LENGTH =  200;
 
 float GARAGE_TRACE_OFFSET_ANGLE = -5.0;
-float GARAGE_TRACE_LENGTH = 75.0;
+//float GARAGE_TRACE_LENGTH = 75.0;
+float GARAGE_TRACE_LENGTH = 100.0;
 
 //Parameter of Area
 

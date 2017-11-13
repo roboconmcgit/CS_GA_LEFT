@@ -390,6 +390,7 @@ void CommandCalc::Track_run( ) {
   case Go_Garage:
     GarageRunner();
     break;
+
   case Track_Debug_00:
     ref_odo = mOdo + FST_DANSA_POS;
     Track_Mode = Track_Debug_01;
@@ -1365,118 +1366,147 @@ void CommandCalc::LookUpGateRunner(){
 
 void CommandCalc::GarageRunner(){
 
- 	int dammy_line_value;
+  int dammy_line_value;
   static int32_t clock_start;
   static float   ref_odo;
 
-	switch(Garage_Mode){
-		case Garage_Start:
-			tail_stand_mode = false;
-			tail_lug_mode  = false;
-			ref_odo = mOdo + GARAGE_TRACE_LENGTH;
-
-      clock_start = gClock->now();
-			Garage_Mode = SHORT_RUN;
-			tail_lug_mode  = false;
-			Rolling_mode = 0;
-			break;
-    case debug_wait:
+  switch(Garage_Mode){
+  case Garage_Start:
+    tail_stand_mode = false;
+    tail_lug_mode   = false;
+    ref_odo         = mOdo + GARAGE_TRACE_LENGTH;
+	  
+    clock_start = gClock->now();
+    Garage_Mode = SHORT_RUN;
+    tail_lug_mode  = false;
+    Rolling_mode = 0;
+    break;
+  case debug_wait:
     /*
-			anglecommand = TAIL_ANGLE_RUN; //0817 tada
-			tail_stand_mode = false;
-			tail_lug_mode  = false;
-			Rolling_mode = 0;
-			if(gClock->now() - clock_start > 5000){
-				//Garage_Mode = Left_Turn;
-				Garage_Mode = Tail_On;
-				ref_odo = mOdo + GARAGE_TRACE_LENGTH;
+      anglecommand = TAIL_ANGLE_RUN; //0817 tada
+      tail_stand_mode = false;
+      tail_lug_mode  = false;
+      Rolling_mode = 0;
+      if(gClock->now() - clock_start > 5000){
+      //Garage_Mode = Left_Turn;
+      Garage_Mode = Tail_On;
+      ref_odo = mOdo + GARAGE_TRACE_LENGTH;
       }
-      */
-			break;
-		case SHORT_RUN:
-			forward = 10;
-			tail_stand_mode = false;
-			tail_lug_mode  = false;
-			Rolling_mode = 0;
-			yawratecmd = 0;
-			if(mOdo >= ref_odo){
-				Garage_Mode = Tail_On;
-				forward    = 0;
-				yawratecmd = 0;
-			}
-			break;
-		case Tail_On:
-			tail_stand_mode = true;
-			tail_lug_mode  = false;
-			Rolling_mode  = 0;
+    */
+    break;
+  case SHORT_RUN:
+    forward = 20;
+    tail_stand_mode = false;
+    tail_lug_mode   = false;
+    Rolling_mode    = 0;
+
+    y_t = -0.5*((FIVE_PAI+RAD_5_DEG) - mYawangle);
+    yawratecmd = y_t;
+    //    yawratecmd = 0;
+    
+    if(mOdo >= ref_odo){
+      Garage_Mode = Tail_On;
+      forward    = 0;
+      yawratecmd = 0;
+    }
+    break;
+  
+  case Tail_On:
+    tail_stand_mode = true;
+    tail_lug_mode   = false;
+    Rolling_mode    = 0;
 		
-			forward    = 0;
-			yawratecmd = 0;
-			if(mRobo_balance_mode == false){
-				Garage_Mode = LineCheck;
-				clock_start = gClock->now();
-			}
-		case LineCheck:
-			tail_stand_mode = true;
-			tail_lug_mode  = false;
-			Rolling_mode = 1;
-			forward      = 50;
-			yawratecmd = 0;
-			if(gClock->now() - clock_start > 3000){
-				Rolling_mode = 2;
-			}
-			if(mLinevalue >= 100){
-				Garage_Mode = LineTrace;
-				tail_stand_mode = true;
-				tail_lug_mode  = false;
-				Rolling_mode = 0;
-				forward      = 0;
-				yawratecmd = 0;
-				clock_start = gClock->now();
-			}
-			break;
-		case LineComeBack:
-			tail_stand_mode = true;
-			tail_lug_mode  = false;
-			Rolling_mode = 0;
-			forward      = 0;
-			yawratecmd = 0;
-			if(gClock->now() - clock_start > 1000){
-				Garage_Mode = LineTrace;
-				ref_odo     = mOdo + 50;
-				clock_start = gClock->now();
-			}
-			break;
+    forward    = 0;
+    yawratecmd = 0;
+
+    if(mRobo_balance_mode == false){
+      Garage_Mode = LineCheck;
+      clock_start = gClock->now();
+    }
+    break;
+
+  case LineCheck:
+
+    tail_stand_mode = true;
+    tail_lug_mode  = false;
+    //    Rolling_mode = 1;
+    Rolling_mode = 2;
+    forward      = 50;
+
+    if(gClock->now() - clock_start > 3000){
+      //  Rolling_mode = 2;
+      Rolling_mode = 1;
+    }
+
+
+
+    dammy_line_value =  LUG_COL_VAL_GAIN*(mLinevalue -  LUG_COL_VAL_OFFSET);
+    if(dammy_line_value > 100){
+      dammy_line_value = 100;
+    }else if(dammy_line_value < 0){
+      dammy_line_value = 0;
+    }
+
+    if(dammy_line_value >= 50){
+    //    if(mLinevalue >= 100){
+      Garage_Mode = LineTrace;
+      tail_stand_mode = true;
+      tail_lug_mode  = false;
+      Rolling_mode = 0;
+      forward      = 0;
+      yawratecmd = 0;
+      clock_start = gClock->now();
+    }
+
+
+    break;
+
+  case LineComeBack:
+    tail_stand_mode = true;
+    tail_lug_mode  = false;
+    Rolling_mode = 0;
+    forward      = 0;
+    yawratecmd = 0;
+    if(gClock->now() - clock_start > 1000){
+      Garage_Mode = LineTrace;
+      ref_odo     = mOdo + 50;
+      clock_start = gClock->now();
+    }
+    break;
 		
-		// Copy for Ang_Right
-		case LineTrace:
-			//if(gClock->now() - clock_start > 2000){
-				forward       = 15;
-			//}else{
-			//	forward       = 0;
-			//}
+    // Copy for Ang_Right
+  case LineTrace:
+    //if(gClock->now() - clock_start > 2000){
+    forward       = 15;
+    //}else{
+    //	forward       = 0;
+    //}
+    
+    dammy_line_value =  LUG_COL_VAL_GAIN*(mLinevalue -  LUG_COL_VAL_OFFSET);
+    if(dammy_line_value > 100){
+      dammy_line_value = 100;
+    }else if(dammy_line_value < 0){
+      dammy_line_value = 0;
+    }
 
-			dammy_line_value =  LUG_COL_VAL_GAIN*(mLinevalue -  LUG_COL_VAL_OFFSET);
-			if(dammy_line_value > 100){
-				dammy_line_value = 100;
-			}else if(dammy_line_value < 0){
-				dammy_line_value = 0;
-			}
-			LineTracerYawrate(dammy_line_value);
+    LineTracerYawrate(dammy_line_value);
+    
+    //det gray zone
+    if(mOdo > ref_odo){
+      //      if(mYawangle <  RAD_150_DEG){
+      if(mYawangle <  (FIVE_PAI - RAD_30_DEG)){
+	forward       = 0;
+      } 
+      //      if(mYawangle <  RAD_120_DEG){
+      if(mYawangle <  (FIVE_PAI - RAD_60_DEG) ){
 
-			//det gray zone
-			if(mOdo > ref_odo){
-				if(mYawangle <  RAD_150_DEG){
-					forward       = 0;
-				} 
-				if(mYawangle <  RAD_120_DEG){
-					forward     = 0;
-					Garage_Mode = GO_GARAGE;
-					ref_odo     = mOdo + LUG_GRAY_TO_GARAGE;
-					clock_start = gClock->now();
-				} 
-			}
-
+	forward     = 0;
+	Garage_Mode = GO_GARAGE;
+	ref_odo     = mOdo + LUG_GRAY_TO_GARAGE;
+	clock_start = gClock->now();
+      } 
+    }
+    
 			break;
 		case GO_GARAGE:
 
@@ -1495,7 +1525,8 @@ void CommandCalc::GarageRunner(){
 				forward = 10;
 			}
 
-			y_t = -2.0*(PAI - mYawangle);
+			//			y_t = -2.0*(PAI - mYawangle);
+			y_t = -2.0*(FIVE_PAI - mYawangle);
 			yawratecmd = y_t;
 
 			if(ref_odo - mOdo < 10){
