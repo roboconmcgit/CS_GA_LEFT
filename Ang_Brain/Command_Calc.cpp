@@ -1507,7 +1507,7 @@ void CommandCalc::GarageRunner(){
       } 
       //      if(mYawangle <  RAD_120_DEG){
       //      if(mYawangle <  (FIVE_PAI - RAD_60_DEG) ){
-      if(mYawangle <  (FIVE_PAI - RAD_15_DEG) ){
+      if(mYawangle <  (FIVE_PAI - RAD_15_DEG) ){ /*CS*/
 	forward     = 0;
 	Garage_Mode = GO_GARAGE;
 	ref_odo     = mOdo + LUG_GRAY_TO_GARAGE;
@@ -1537,7 +1537,7 @@ void CommandCalc::GarageRunner(){
     // y_t = -2.0*(FIVE_PAI + RAD_5_DEG - mYawangle);
     //    y_t = -2.0*(FIVE_PAI + RAD_30_DEG - mYawangle); NG
     // y_t = -2.0*(FIVE_PAI + RAD_15_DEG - mYawangle);
-    y_t = -2.0*(FIVE_PAI + RAD_5_DEG - mYawangle);
+    y_t = -2.0*(FIVE_PAI + RAD_5_DEG - mYawangle);   /*CS*/
 
     yawratecmd = y_t;
     
@@ -1545,7 +1545,7 @@ void CommandCalc::GarageRunner(){
     //    if(ref_odo - mOdo < 30){
     // if(ref_odo - mOdo < 50){
     //    if(ref_odo - mOdo < 100){
-    if(ref_odo - mOdo < 80){
+    if(ref_odo - mOdo < 80){    /*CS*/
       forward    = 0;
       yawratecmd = 0;
       Garage_Mode = GarageIn;
