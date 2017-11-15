@@ -65,7 +65,8 @@ float RAD_450_DEG  = 7.8540;
 float FINAL_STRAIGHT_LENGTH = 1100.0;
 //float DEAD_ZONE_LENGTH      =  500.0; //0929 tada
 //float DEAD_ZONE_LENGTH      =  700.0; //0929 tada
-float DEAD_ZONE_LENGTH      =  600.0; //1008 ota
+//float DEAD_ZONE_LENGTH      =  600.0; //1008 ota
+float DEAD_ZONE_LENGTH      =  700.0; //1008 ota /*CS*/
 
 float DEAD_ZONE_ANGLE       = 0.5; //[rad] 0929 tada Heading Direction while Dead Zone (Less than 1.0)
 float LOST_ANGLE_UP         = 2.1; //[rad] 0929 tada Miss Course Desition Angle  Upper

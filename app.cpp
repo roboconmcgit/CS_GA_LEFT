@@ -79,7 +79,8 @@ static Ang_Robo  *gAng_Robo;
 static Balancer  *gBalancer;
 
 //0729 kota Color Sensor Calibration
-unsigned char white       = 60;
+//unsigned char white       = 60;
+unsigned char white       = 45; /*CS*/
 unsigned char black       = 2;
 unsigned char white_slant = 12;
 unsigned char black_slant = 2;

@@ -663,7 +663,9 @@ void CommandCalc::MapTracer(int virtualgate_num, float mXvalue, float mYvalue, f
 	float Virtual_S1[4]={735.96,   415.74,  735.96, 2558.54 };
 	float Virtual_C1[3]={1083.86, 2558.54,  347.9           };
 	//	float Virtual_S2[4]={1426.36, 2494.88, 1210.99, 1290.24 };
-	float Virtual_S2[4]={1426.36, 2494.88, 1210.99 - 50.0, 1290.24 };
+	//	float Virtual_S2[4]={1426.36, 2494.88, 1210.99 - 50.0, 1290.24 }; /*CS*/
+	//	float Virtual_S2[4]={1426.36, 2494.88, 1210.99 - 70.0, 1290.24 }; /*CS*/
+	float Virtual_S2[4]={1426.36, 2494.88, 1210.99 - 80.0, 1290.24 }; /*CS*/
 
 	//	float Virtual_C2[3]={1458.8,  1246.03,  251.72          };
 	float Virtual_C2[3]={1458.8 - 50.0,  1246.03,  251.72          };
@@ -674,7 +676,8 @@ void CommandCalc::MapTracer(int virtualgate_num, float mXvalue, float mYvalue, f
 
 	float Virtual_C3[3]={3202.03,    0.0,  1750.0           };
 	//	float Virtual_S4[4]={3202.03, 1750.0,  4600.0,  1760.0  };
-	float Virtual_S4[4]={3202.03, 1750.0,  4600.0,  1810.0  };
+	//	float Virtual_S4[4]={3202.03, 1750.0,  4600.0,  1810.0  };
+	float Virtual_S4[4]={3202.03, 1750.0,  4600.0,  1785.0  }; /*CS*/
 #endif
 
 
@@ -940,8 +943,9 @@ void CommandCalc::StepRunner(int line_value, float odo, float angle, bool dansa)
       dat_gain   = (40.0 * bat_gain)+0.5;
       forward    =  (int)dat_gain;
 
-      y_t        = -0.5*( RAD_88p5_DEG - angle);
-      yawratecmd = y_t;
+      //      y_t        = -0.5*( (RAD_88p5_DEG -RAD_1_DEG) - angle);
+      //      yawratecmd = y_t;
+      LineTracerYawrate((CL_SNSR_GAIN_GRAY * line_value)); /*CS*/
     }else{
       //1113 k-ota      forward =  70;
       forward =  30; //1113 k-ota
@@ -1140,7 +1144,8 @@ void CommandCalc::StepRunner(int line_value, float odo, float angle, bool dansa)
       anglecommand = TAIL_ANGLE_RUN;
     }else{
       //      forward    = 10;
-      forward    =  STEP_CLIMB_MAX_SPEED;
+      //      forward    =  STEP_CLIMB_MAX_SPEED;
+      forward    =  STEP_CLIMB_MAX_SPEED + 2; /*CS*/
 
       dat_gain     = (forward * bat_gain)+0.5;
       forward      = (int)dat_gain;
@@ -1196,7 +1201,8 @@ void CommandCalc::StepRunner(int line_value, float odo, float angle, bool dansa)
       }else{
 	forward     = gForward->calc_pid(ref_odo, odo);
 	//	forward     = forward * 0.2;
-	forward     = forward * 0.4;
+	//	forward     = forward * 0.4;
+	forward     = (forward * 0.4) + 2; /*CS*/
 
 	/*
 	if(forward > STEP_CLIMB_MAX_SPEED){
@@ -1204,7 +1210,9 @@ void CommandCalc::StepRunner(int line_value, float odo, float angle, bool dansa)
 	}
 	*/
 
-	dat_gain =  STEP_CLIMB_MAX_SPEED * bat_gain;
+	//	dat_gain =  STEP_CLIMB_MAX_SPEED * bat_gain;
+	dat_gain =  (STEP_CLIMB_MAX_SPEED * bat_gain)+2; /*CS*/
+
 	if(forward > dat_gain){
 	  dat_gain = dat_gain + 0.5;
 	  forward     = dat_gain;
@@ -1545,7 +1553,8 @@ void CommandCalc::GarageRunner(){
     //    if(ref_odo - mOdo < 30){
     // if(ref_odo - mOdo < 50){
     //    if(ref_odo - mOdo < 100){
-    if(ref_odo - mOdo < 80){    /*CS*/
+    //    if(ref_odo - mOdo < 80){    /*CS*/
+    if(ref_odo - mOdo < 70){    /*CS*/
       forward    = 0;
       yawratecmd = 0;
       Garage_Mode = GarageIn;
